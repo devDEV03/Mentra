@@ -22,6 +22,8 @@ import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -29,6 +31,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -46,6 +52,13 @@ import com.example.mentra.data.bookList
 fun BookACall(
     navCon : NavHostController
 ){
+    
+    var expanded1 by remember{
+        mutableStateOf(false)
+    }
+    var expanded2 by remember{
+        mutableStateOf(false)
+    }
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -76,15 +89,42 @@ fun BookACall(
         Column (
             modifier = Modifier.padding(innerPadding)
         ){
-            Row {
+            Box {
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.padding(12.dp).background(Color.Black)
+                ) {
+                    DropdownMenu(
+                        expanded = expanded1,
+                        onDismissRequest = { expanded1 = false },
+                        content = {
+                            DropdownMenuItem(text = { Text(text = "item1") }, onClick = { /*TODO*/ })
+                            DropdownMenuItem(text = { Text(text = "item1") }, onClick = { /*TODO*/ })
+                            DropdownMenuItem(text = { Text(text = "item1") }, onClick = { /*TODO*/ })
+                            DropdownMenuItem(text = { Text(text = "item1") }, onClick = { /*TODO*/ })
 
+                        }
+                    )
+                    DropdownMenu(
+                        expanded = expanded2,
+                        onDismissRequest = { expanded2 = false },
+                        content = {
+                            DropdownMenuItem(text = { Text(text = "item1") }, onClick = { /*TODO*/ })
+                            DropdownMenuItem(text = { Text(text = "item1") }, onClick = { /*TODO*/ })
+                            DropdownMenuItem(text = { Text(text = "item1") }, onClick = { /*TODO*/ })
+                            DropdownMenuItem(text = { Text(text = "item1") }, onClick = { /*TODO*/ })
+                        }
+                        )
+                }
             }
+
             LazyVerticalGrid(columns = GridCells.Adaptive(256.dp),
                 content = {
                     items(bookList){
                             it ->
                         Card(
-                            modifier = Modifier.padding(12.dp)
+                            modifier = Modifier
+                                .padding(12.dp)
                                 .clickable {
                                     navCon.navigate(Screens.Details.name)
                                 }

@@ -28,7 +28,7 @@ val Typography = Typography(
         fontSize = 24.sp,
         lineHeight = 28.sp,
         letterSpacing = 0.7.sp,
-        color = Color.Cyan
+        color = heading
     ),
     labelSmall = TextStyle(
         fontFamily = FontFamily.Default,
